@@ -1,31 +1,39 @@
-.image-checkbox-group {
+.imageCheckboxGroup {
+    width: 360px;
     display: flex;
-    gap: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
   }
   
-  .image-checkbox-label {
+  .imageCheckboxLabel {
     display: flex;
     flex-direction: column;
     align-items: center;
     cursor: pointer;
+    width: 112px;
+    height: 96px;
+    /* width: 32px;
+    height: 64px; */
+    border-radius: 12px;
+    border: 1px solid #DADDE1;
+  }
+  .imageCheckboxLabel:hover{
+    border: 1px solid #E44848;
   }
   
-  .image-checkbox {
-    width: 100px;
-    height: 100px;
+  .imageCheckbox {
+    width: 112px;
+    height: 96px;
     object-fit: cover;
     border: 2px solid transparent;
     transition: border-color 0.3s ease;
+    fill:#101828;
   }
   
-  .image-checkbox.selected {
-    border-color: #00f2ff; /* Цвет рамки для выбранной картинки */
+  .imageCheckbox.selected {
+    border-color: #E44848; /* Цвет рамки для выбранной картинки */
   }
-  
-  .image-checkbox-input {
-    display: none; /* Скрываем стандартный чекбокс */
-  }
-  
+    
   .error {
     color: red;
     margin-top: 10px;

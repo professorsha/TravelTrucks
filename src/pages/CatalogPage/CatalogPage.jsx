@@ -32,9 +32,9 @@ const CatalogPage = () => {
           ariaLabel="infinity-spin-loading"
         />
       )}
-      <div className={css.list}>
+      <aside className={css.list}>
         <FilterForm></FilterForm>
-      </div>
+      </aside>
       <div className={css.list}>
         <CamperList campers={campers} />
       </div>

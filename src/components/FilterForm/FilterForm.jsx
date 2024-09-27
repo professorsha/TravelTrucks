@@ -3,14 +3,23 @@ import { Field, Form, Formik, ErrorMessage } from 'formik';
 import { useId } from 'react';
 import { filterSchema } from '../../validation.js';
 // Массив с данными для чекбоксов
-const imageOptions = [
-  { id: 'AC', label: 'AC', image: '/path/to/AC.jpg' },
-  { id: 'Automatic', label: 'Automatic', image: '/path/to/Automatic.jpg' },
-  { id: 'Kitchen', label: 'Kitchen', image: '/path/to/Kitchen.jpg' },
-  { id: 'TV', label: 'TV', image: '/path/to/TV.jpg' },
-  { id: 'Bathroom', label: 'Bathroom', image: '/path/to/Bathroom.jpg' },
+
+const imageEquipments = [
+  { id: 'AC', label: 'AC', icon: '/images/icons.svg#iconAC' },
+  { id: 'Automatic', label: 'Automatic', icon: '/images/icons.svg#iconAutomatic' },
+  { id: 'Kitchen', label: 'Kitchen', icon: '/images/icons.svg#iconKitchen' },
+  { id: 'TV', label: 'TV', icon: '/images/icons.svg#iconTv' },
+  { id: 'Bathroom', label: 'Bathroom', icon: '/images/icons.svg#iconBathroom' },
 ];
-const imageType = [{}, {}, {}];
+const imageType = [
+  { id: 'Van', label: 'Van', icon: '/images/icons.svg#iconVan' },
+  {
+    id: 'FullyIntegrated',
+    label: 'Fully Integrated',
+    icon: '/images/icons.svg#iconFullyIntegrated',
+  },
+  { id: 'Alcove', label: 'Alcove', icon: '/images/icons.svg#iconAlcove' },
+];
 
 const FilterForm = () => {
   const locationFieldId = useId();
@@ -18,17 +27,21 @@ const FilterForm = () => {
   const typeFieldId = useId();
   return (
     <Formik
-      initialValues={{ location: '', selectedEquipment: '', type: '' }}
+      initialValues={{ location: '', selectedEquipment: '', selectedType: '' }}
       //   validationSchema={filterSchema}
       onSubmit={(values, actions) => {
         const userData = {
           location: values.location,
           selectedEquipment: values.selectedEquipment,
-          type: values.type,
+          selectedType: values.selectedType,
         };
         // dispatch(logIn(userData));
 
-        console.log('Selected values:', userData.selectedEquipment);
+        console.log(
+          'Selected values:',
+          userData.selectedEquipment,
+          userData.selectedType
+        );
 
         actions.resetForm();
       }}
@@ -53,11 +66,12 @@ const FilterForm = () => {
           </div>
 
           <span>Filters</span>
-          <div className="image-checkbox-group">
-            {imageOptions.map(option => (
+          <h4>Vehicle equipment</h4>
+          <div className={css.imageCheckboxGroup}>
+            {imageEquipments.map(option => (
               <label
                 key={option.id}
-                className="image-checkbox-label"
+                className={css.imageCheckboxLabel}
                 onClick={() => {
                   // Изменяем состояние, если картинка выбрана
                   const newSelectedEquipment =
@@ -68,16 +82,17 @@ const FilterForm = () => {
                   setFieldValue('selectedEquipment', newSelectedEquipment);
                 }}
               >
-            {/* Используем картинку как "чекбокс" */}
-            <img
-                  src={option.image}
-                  alt={option.label}
+                {/* Используем картинку как "чекбокс" */}
+                <svg
                   className={
                     values.selectedEquipment.includes(option.id)
-                      ? 'image-checkbox selected'
-                      : 'image-checkbox'
+                      ? 'imageCheckbox selected'
+                      : 'imageCheckbox'
                   }
-                />
+                  width="32px" height="32px"
+                >
+                  <use href={option.icon}></use>
+                </svg>
                 <span>{option.label}</span>
               </label>
             ))}
@@ -86,7 +101,41 @@ const FilterForm = () => {
           {errors.selectedEquipment && touched.selectedEquipment && (
             <div className="error">{errors.selectedEquipment}</div>
           )}
+          <h4>Vehicle type</h4>
+          <div className={css.imageCheckboxGroup}>
+            {imageType.map(option => (
+              <label
+                key={option.id}
+                className={css.imageCheckboxLabel}
+                onClick={() => {
+                  // Изменяем состояние, если картинка выбрана
+                  const newSelectedType = values.selectedType.includes(
+                    option.id
+                  )
+                    ? values.selectedType.filter(id => id !== option.id)
+                    : [...values.selectedType, option.id];
 
+                  setFieldValue('selectedType', newSelectedType);
+                }}
+              >
+                {/* Используем картинку как "чекбокс" */}
+                <svg
+                  className={
+                    values.selectedEquipment.includes(option.id)
+                      ? 'imageCheckbox selected'
+                      : 'imageCheckbox'
+                  }
+                >
+                  <use href={option.icon}></use>
+                </svg>
+                <span>{option.label}</span>
+              </label>
+            ))}
+          </div>
+          {/* Показываем ошибку, если ни один чекбокс не выбран */}
+          {errors.selectedType && touched.selectedType && (
+            <div className="error">{errors.selectedType}</div>
+          )}
           <button type="submit" className={css.submitButton}>
             Search
           </button>

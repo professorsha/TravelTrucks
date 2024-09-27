@@ -20,6 +20,7 @@ const Camper = ({ camper }) => {
 
   return (
     <div className={css.camper}>
+        <img className={css.image} src={camper.gallery[0].thumb} alt='' width="292px" height="320px"/>
       <div className={css.data}>
         <h3 className={css.title}>{camper.name}</h3>
         <p className={css.info}>
