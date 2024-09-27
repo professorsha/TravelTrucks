@@ -1,5 +1,5 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit';
-import { fetchCatalog } from './operations.js';
+import { fetchCatalog, fetchCatalogById } from './operations.js';
 import { selectCampers } from './selectors.js';
 // import { selectNameFilter } from '../filters/selectors';
 
@@ -40,9 +40,16 @@ const campersSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.items = action.payload;
-        console.log(action.payload);
-        
+        // console.log(action.payload);
       })
+      .addCase(fetchCatalogById.rejected, handleRejected)
+      .addCase(fetchCatalogById.pending, handlePending)
+      .addCase(fetchCatalogById.fulfilled,(state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.activeCamperId = action.payload;
+        // console.log(action.payload);
+      });
     //   .addCase(addContact.rejected, handleRejected)
     //   .addCase(addContact.pending, handlePending)
     //   .addCase(addContact.fulfilled, (state, action) => {
@@ -80,8 +87,7 @@ const campersSlice = createSlice({
 
 // export const { toggleModal, setActiveCamperId, clearActiveCampertId } =
 // campersSlice.actions;
-export const { setActiveCamperId, clearActiveCampertId } =
-campersSlice.actions;
+export const { setActiveCamperId, clearActiveCampertId } = campersSlice.actions;
 export const campersReducer = campersSlice.reducer;
 
 // export const selectFilteredCampers = createSelector(

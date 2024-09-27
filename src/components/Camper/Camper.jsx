@@ -31,8 +31,8 @@ const Camper = ({ camper }) => {
           <div>
             <h3 className={css.title}>{camper.name}</h3>
             <span className={css.price}>;&euro{camper.price}</span>
-            <svg width="32px" height="32px">
-              <use href="../../../public/images/icons.svg#"></use>
+            <svg width="32px" height="32px" className={css.favorite}>
+              <use href="/images/icons.svg#iconHeart"></use>
             </svg>
           </div>
           <div>

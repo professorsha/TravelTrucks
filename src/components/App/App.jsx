@@ -16,6 +16,7 @@ const NotFoundPage = lazy(() =>
   import('../../pages/NotFoundPage/NotFoundPage')
 );
 const CatalogPage = lazy(() => import('../../pages/CatalogPage/CatalogPage'));
+const CamperDetailsPage = lazy(() => import('../../pages/CamperDetailsPage/CamperDetailsPage'));
 
 export default function App() {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ export default function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
             <Route path="/catalog" element={<CatalogPage />} />
+            <Route path="/catalog/id" element={<CamperDetailsPage />}/>
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>

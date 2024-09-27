@@ -1,6 +1,9 @@
 .image {
   border-radius: 10px;
 }
+.favorite{
+fill:black;
+}
 .button {
   color: #ffffff;
 }

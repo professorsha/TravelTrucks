@@ -19,7 +19,7 @@ const CamperList = () => {
 
   // Обработчик для кнопки "Load More"
   const handleLoadMore = () => {
-    setVisibleCampers((prevVisibleCampers) => prevVisibleCampers + 5); // Увеличиваем на 5 элементов
+    setVisibleCampers((prevVisibleCampers) => prevVisibleCampers + 4); // Увеличиваем на 5 элементов
   };
 
   return (
