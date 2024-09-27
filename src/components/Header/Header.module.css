@@ -1,0 +1,22 @@
+.container{
+    background-color: #F2F4F7;
+}
+.navigation{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    /* align-content: center; */
+    justify-content: space-between;
+    align-items: center;}
+.logo{
+padding: 28px 0 28px 64px;
+}
+.logo_accent{
+ color: #475467;
+}
+.menu{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap:32px;
+}

@@ -1,0 +1,33 @@
+.image-checkbox-group {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .image-checkbox-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .image-checkbox {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+  
+  .image-checkbox.selected {
+    border-color: #00f2ff; /* Цвет рамки для выбранной картинки */
+  }
+  
+  .image-checkbox-input {
+    display: none; /* Скрываем стандартный чекбокс */
+  }
+  
+  .error {
+    color: red;
+    margin-top: 10px;
+  }
+  
