@@ -6,7 +6,8 @@
     flex-direction: row;
     flex-wrap: nowrap;
     /* align-content: center; */
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap:200px;
     align-items: center;}
 .logo{
 padding: 28px 0 28px 64px;

@@ -23,7 +23,10 @@ const CatalogPage = () => {
   }, [dispatch]);
 
   return (
-    <div className={css.container}>
+    <main className={css.container}>
+      <aside className={css.list}>
+        <FilterForm></FilterForm>
+      </aside>
       {isLoading && !error && (
         <InfinitySpin
           visible={true}
@@ -32,13 +35,10 @@ const CatalogPage = () => {
           ariaLabel="infinity-spin-loading"
         />
       )}
-      <aside className={css.list}>
-        <FilterForm></FilterForm>
-      </aside>
-      <div className={css.list}>
+      <div className={css.listCampers}>
         <CamperList campers={campers} />
       </div>
-    </div>
+    </main>
   );
 };
 export default CatalogPage;

@@ -1,4 +1,9 @@
 .container{
     margin: 0 64px;
     display: flex;
+    gap: 64px;
+    justify-content: space-between;
+}
+.listCampers{
+    text-align: center;
 }
