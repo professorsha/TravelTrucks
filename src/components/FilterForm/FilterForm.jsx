@@ -10,6 +10,7 @@ const imageOptions = [
   { id: 'TV', label: 'TV', image: '/path/to/TV.jpg' },
   { id: 'Bathroom', label: 'Bathroom', image: '/path/to/Bathroom.jpg' },
 ];
+const imageType = [{}, {}, {}];
 
 const FilterForm = () => {
   const locationFieldId = useId();
@@ -32,7 +33,7 @@ const FilterForm = () => {
         actions.resetForm();
       }}
     >
-      {({ values, errors, touched }) => (
+      {({ values, setFieldValue, errors, touched }) => (
         <Form className={css.formContainer}>
           <label htmlFor={locationFieldId} className={css.label}>
             location
@@ -50,18 +51,25 @@ const FilterForm = () => {
               className={css.errorMessage}
             />
           </div>
+
           <span>Filters</span>
           <div className="image-checkbox-group">
             {imageOptions.map(option => (
-              <label key={option.id} className="image-checkbox-label">
-                <Field
-                  type="checkbox"
-                  name="selectedEquipment"
-                  value={option.id}
-                  className="image-checkbox-input"
-                />
-                {/* Добавляем картинку как фон для чекбокса */}
-                <img
+              <label
+                key={option.id}
+                className="image-checkbox-label"
+                onClick={() => {
+                  // Изменяем состояние, если картинка выбрана
+                  const newSelectedEquipment =
+                    values.selectedEquipment.includes(option.id)
+                      ? values.selectedEquipment.filter(id => id !== option.id)
+                      : [...values.selectedEquipment, option.id];
+
+                  setFieldValue('selectedEquipment', newSelectedEquipment);
+                }}
+              >
+            {/* Используем картинку как "чекбокс" */}
+            <img
                   src={option.image}
                   alt={option.label}
                   className={
@@ -75,8 +83,8 @@ const FilterForm = () => {
             ))}
           </div>
           {/* Показываем ошибку, если ни один чекбокс не выбран */}
-          {errors.selectedImages && touched.selectedImages && (
-            <div className="error">{errors.selectedImages}</div>
+          {errors.selectedEquipment && touched.selectedEquipment && (
+            <div className="error">{errors.selectedEquipment}</div>
           )}
 
           <button type="submit" className={css.submitButton}>
