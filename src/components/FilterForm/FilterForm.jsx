@@ -6,7 +6,11 @@ import { filterSchema } from '../../validation.js';
 
 const imageEquipments = [
   { id: 'AC', label: 'AC', icon: '/images/icons.svg#iconAC' },
-  { id: 'Automatic', label: 'Automatic', icon: '/images/icons.svg#iconAutomatic' },
+  {
+    id: 'Automatic',
+    label: 'Automatic',
+    icon: '/images/icons.svg#iconAutomatic',
+  },
   { id: 'Kitchen', label: 'Kitchen', icon: '/images/icons.svg#iconKitchen' },
   { id: 'TV', label: 'TV', icon: '/images/icons.svg#iconTv' },
   { id: 'Bathroom', label: 'Bathroom', icon: '/images/icons.svg#iconBathroom' },
@@ -27,7 +31,7 @@ const FilterForm = () => {
   const typeFieldId = useId();
   return (
     <Formik
-      initialValues={{ location: '', selectedEquipment: '', selectedType: '' }}
+      initialValues={{ location: '', selectedEquipment: [], selectedType: '' }}
       //   validationSchema={filterSchema}
       onSubmit={(values, actions) => {
         const userData = {
@@ -89,7 +93,8 @@ const FilterForm = () => {
                       ? 'imageCheckbox selected'
                       : 'imageCheckbox'
                   }
-                  width="32px" height="32px"
+                  width="32px"
+                  height="32px"
                 >
                   <use href={option.icon}></use>
                 </svg>
@@ -108,14 +113,14 @@ const FilterForm = () => {
                 key={option.id}
                 className={css.imageCheckboxLabel}
                 onClick={() => {
-                  // Изменяем состояние, если картинка выбрана
-                  const newSelectedType = values.selectedType.includes(
-                    option.id
-                  )
-                    ? values.selectedType.filter(id => id !== option.id)
-                    : [...values.selectedType, option.id];
+                  //   // Изменяем состояние, если картинка выбрана
+                  //   const newSelectedType = values.selectedType.includes(
+                  //     option.id
+                  //   )
+                  //     ? values.selectedType.filter(id => id !== option.id)
+                  //     : [...values.selectedType, option.id];
 
-                  setFieldValue('selectedType', newSelectedType);
+                  setFieldValue('selectedType', option.id);
                 }}
               >
                 {/* Используем картинку как "чекбокс" */}
@@ -125,6 +130,8 @@ const FilterForm = () => {
                       ? 'imageCheckbox selected'
                       : 'imageCheckbox'
                   }
+                  width="32px"
+                  height="32px"
                 >
                   <use href={option.icon}></use>
                 </svg>
