@@ -1,6 +1,6 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit';
 import { fetchCatalog, fetchCatalogById } from './operations.js';
-import { selectCampers } from './selectors.js';
+import { selectCampers,selectActiveCamperId } from './selectors.js';
 // import { selectNameFilter } from '../filters/selectors';
 
 export const handlePending = state => {
@@ -29,7 +29,7 @@ const campersSlice = createSlice({
       state.activeCamperId = action.payload;
     },
     clearActiveCamperId(state) {
-      state.activeCampertId = null;
+      state.activeCamperId = null;
     },
   },
   extraReducers: builder => {
@@ -48,7 +48,7 @@ const campersSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.activeCamperId = action.payload;
-        // console.log(action.payload);
+         console.log(state.activeCamperId);
       });
     //   .addCase(addContact.rejected, handleRejected)
     //   .addCase(addContact.pending, handlePending)

@@ -1,24 +1,52 @@
-import css from './CatalogPage.module.css';
-import { fetchCatalog } from '../../redux/campers/operations.js';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  selectCampers,
-  selectError,
-  selectIsLoading,
-} from '../../redux/campers/selectors.js';
-const CamperDetailsPage=()=>{
-const campers = useSelector(selectCampers);
-const isLoading = useSelector(selectIsLoading);
-const error = useSelector(selectError);
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import css from './CamperDetailsPage.module.css';
 
-const dispatch = useDispatch();
-useEffect(() => {
-  dispatch(fetchCatalog());
-}, [dispatch]);
+const CamperDetailsPage = () => {
+  const { id } = useParams(); // Получаем id из URL
+  const [camper, setCamper] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-return(<>
-<h1>hello</h1>
-</>)
+  // Запрос на получение данных по id
+  useEffect(() => {
+    const fetchCamperDetails = async () => {
+      try {
+        const response = await axios.get(`https://66b1f8e71ca8ad33d4f5f63e.mockapi.io/campers/${id}`); // Запрос на бэкенд
+        setCamper(response.data); // Сохраняем данные
+        setIsLoading(false);
+      } catch (err) {
+        setError('Failed to fetch camper details');
+        setIsLoading(false);
+      }
+    };
+
+    fetchCamperDetails();
+  }, [id]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  return (
+    <div className={css.details}>
+      <h2>{camper.name}</h2>
+      <img src={camper.gallery[0].thumb} alt={camper.name} width="400px" />
+      <p>{camper.description}</p>
+      <span>Price: &euro;{camper.price}</span>
+      <div>
+        <strong>Rating:</strong> {camper.rating} ({camper.reviews.length} reviews)
+      </div>
+      <div>
+        <strong>Location:</strong> {camper.location}
+      </div>
+    </div>
+  );
 };
+
 export default CamperDetailsPage;

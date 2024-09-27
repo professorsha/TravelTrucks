@@ -1,21 +1,15 @@
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import css from './Camper.module.css';
-// import { deleteContact } from "../../redux/contacts/operations";
-// import { MdDeleteForever } from "react-icons/md";
-// import { setActiveContactId, toggleModal } from "../../redux/contacts/slice";
+import { setActiveCamperId } from '../../redux/campers/slice.js';
 
 const Camper = ({ camper }) => {
-  //   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  //   const handleDelete = () => {
-  //     dispatch(deleteContact(id));
-  //   };
-
-  // const handleEdit = () => {
-  //   dispatch(setActiveContactId(id));
-  //   dispatch(toggleModal());
-  // };
+  // Обработчик для клика по кнопке "Show more"
+  const handleDetails = () => {
+    dispatch(setActiveCamperId(camper.id)); // Устанавливаем активный ID
+  };
 
   return (
     <div className={css.camper}>
@@ -30,17 +24,17 @@ const Camper = ({ camper }) => {
         <div className={css.textContainer}>
           <div>
             <h3 className={css.title}>{camper.name}</h3>
-            <span className={css.price}>;&euro{camper.price}</span>
+            <span className={css.price}>&euro;{camper.price}</span>
             <svg width="32px" height="32px" className={css.favorite}>
               <use href="/images/icons.svg#iconHeart"></use>
             </svg>
           </div>
           <div>
-          <svg width="32px" height="32px">
+            <svg width="32px" height="32px">
               <use href="../../../public/images/icons.svg#"></use>
             </svg>
             <span>
-              {camper.rating} ({camper.reviews.lenght}Reviews)
+              {camper.rating} ({camper.reviews.length} Reviews)
             </span>
             <svg width="32px" height="32px">
               <use href="../../../public/images/icons.svg#"></use>
@@ -50,9 +44,13 @@ const Camper = ({ camper }) => {
           <p>{camper.description}</p>
         </div>
       </div>
-      <button type="submit" className={css.button}>
-        <NavLink to={`/catalog/${camper.id}`}>Show more</NavLink>
-      </button>
+
+      {/* Переход по ссылке */}
+      <NavLink to={`/catalog/${camper.id}`}>
+        <button type="button" className={css.button} onClick={handleDetails}>
+          Show more
+        </button>
+      </NavLink>
     </div>
   );
 };
