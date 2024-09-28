@@ -1,0 +1,113 @@
+.container {
+    border: 1px solid #dadde1;
+    border-radius: 10px;
+    padding: 44px;
+    max-width: 616px;
+    margin-top: 20px;   
+}
+
+.group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 528px;
+    margin: 0 auto;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    max-width: 528px;
+    gap: 14px;
+    align-items: center;
+}
+
+.button {
+    width: 156px;
+    height: 56px;
+    
+}
+
+.header {
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 1.2;
+    color: #101828;
+}
+
+.connect {
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #6c717b;
+    margin-bottom: 24px;
+}
+
+.input {
+    border-radius: 10px;   
+    width: 512px;
+    height: 60px;
+    background-color: #f7f7f7;
+    padding-left: 18px;
+}
+.input:focus {
+    outline: none;
+    color: #101828;
+}
+.data {
+    color: transparent;
+    opacity: 1;
+    background:  no-repeat center;
+    background-size: contain;
+    width: 500px;
+    height: 284px;
+}
+
+.area {
+    border-radius: 10px;
+    width: 497px;
+    height: 118px;
+    border: none;
+    background: #f7f7f7;
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #6c717b;
+    padding: 18px;
+}
+.area:focus {
+    color: #101828;
+    outline: none;
+    border: none;
+}
+.error {
+    line-height: 1.29;
+    color: red;
+    font-size: 14px;   
+}
+/* Стили для кастомного календаря */
+/* .input[type="date"] {
+    appearance: none; /* Убираем стандартные стили браузера */
+    /* -webkit-appearance: none;
+    -moz-appearance: textfield;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    color: #d74444;
+  }
+  
+  .input[type="date"]:focus {
+    border-color: #00f2ff;
+    outline: none;
+  }
+  
+  .input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    background-color: transparent;
+    filter: invert(1); /* Меняем цвет пикера календаря (только для WebKit браузеров) */
+  /* }  */

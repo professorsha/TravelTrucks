@@ -41,6 +41,9 @@ const campersSlice = createSlice({
         state.error = null;
         state.items = action.payload;
         // console.log(action.payload);
+        
+        
+        // console.log(action.payload);
       })
       .addCase(fetchCatalogById.rejected, handleRejected)
       .addCase(fetchCatalogById.pending, handlePending)
@@ -48,7 +51,7 @@ const campersSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.activeCamperId = action.payload;
-         console.log(state.activeCamperId);
+        console.log(state.activeCamperId);
       });
     //   .addCase(addContact.rejected, handleRejected)
     //   .addCase(addContact.pending, handlePending)

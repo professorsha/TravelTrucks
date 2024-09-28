@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import css from './Header.module.css';
 const Header = () => {
   return (
-    <div className={css.container}>
+    <header className={css.container}>
       <nav className={css.navigation}>
         <NavLink className={css.logo} to="/">
           Travel<span className={css.logo_accent}>Trucks</span>
@@ -14,7 +14,7 @@ const Header = () => {
           <NavLink to="/catalog">Catalog</NavLink>
         </div>
       </nav>
-    </div>
+    </header>
   );
 };
 

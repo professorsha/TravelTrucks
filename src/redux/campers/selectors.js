@@ -1,4 +1,5 @@
 export const selectCampers = (state) => state.campers.items;
+export const selectGallery =(state)=>state.campers.items.gallery;
 export const selectIsLoading = (state) => state.campers.isLoading;
 export const selectError = (state) => state.campers.error;
 // export const selectIsModalOpen = (state) => state.campers.isModalOpen;

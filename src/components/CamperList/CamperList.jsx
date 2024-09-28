@@ -6,6 +6,7 @@ import {
   selectError,
   selectIsLoading,
   selectCampers,
+  selectGallery,
 } from '../../redux/campers/selectors';
 import { InfinitySpin } from 'react-loader-spinner';
 
@@ -13,6 +14,11 @@ const CamperList = () => {
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
   const campers = useSelector(selectCampers);
+  // const gallery = useSelector(selectGallery);
+//  Проверяем, что данные "Campers" из состояния Redux загружены
+  // console.log('Campers:', campers);
+  // console.log('Is Loading:', isLoading);
+  // console.log('gallery:', gallery); 
 
   // Локальное состояние для отслеживания количества отображаемых элементов
   const [visibleCampers, setVisibleCampers] = useState(4); // Начальное количество элементов
@@ -23,7 +29,7 @@ const CamperList = () => {
   };
 
   return (
-    <div>
+    <>
       {isLoading && !error && (
         <InfinitySpin
           visible={true}
@@ -49,7 +55,7 @@ const CamperList = () => {
       )}
 
       {error && <p className={css.error}>Error loading campers: {error}</p>}
-    </div>
+    </>
   );
 };
 

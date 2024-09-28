@@ -11,6 +11,10 @@
     align-items: center;}
 .logo{
 padding: 28px 0 28px 64px;
+color: #101828;
+}
+.logo:hover{
+    color: #101828; 
 }
 .logo_accent{
  color: #475467;
