@@ -19,27 +19,10 @@ export const fetchCatalogById = createAsyncThunk(
   'campers/fetchById',
   async (id, thunkAPI) => {
     try {
-      const response = await axios.get(`/campers/${id}`);
-      console.log(response.data);
-      return response.data;
+      const res = await axios.get(`/campers/${id}`);
+      return res.data; 
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
-// Асинхронное действие для получения данных о Camper по ID
-// export const fetchCatalogById = createAsyncThunk(
-//   'campers/fetchCatalogById',
-//   async (id, { rejectWithValue }) => {
-//     try {
-//       const response = await axios.get(
-//         `https://66b1f8e71ca8ad33d4f5f63e.mockapi.io/campers/${id}`
-//       );
-//       return response.data;
-//     } catch (error) {
-//       return rejectWithValue(
-//         error.response.data || 'Failed to fetch camper details'
-//       );
-//     }
-//   }
-// );

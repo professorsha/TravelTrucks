@@ -1,18 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import css from './CamperDetailsPage.module.css';
-import { InfinitySpin } from 'react-loader-spinner';
-import BookingForm from '../../components/BookingForm/BookingForm';
 import CamperDetailsGallery from '../../components/CamperDetailsGallery/CamperDetailsGallery';
 import Loader from '../../components/Loader/Loader';
-import Reviews from '../../components/Reviews/Reviews';
-// import { useDispatch, useSelector } from 'react-redux';
-// import {
-//   selectActiveCamperId,
-//   selectError,
-//   selectIsLoading,
-// } from '../../redux/campers/selectors.js';
+import DetailsTabs from '../../components/DetailsTabs/DetailsTabs';
+
 const CamperDetailsPage = () => {
   const { id } = useParams(); // Получаем id из URL
   const [camper, setCamper] = useState(null);
@@ -76,20 +69,10 @@ const CamperDetailsPage = () => {
         <CamperDetailsGallery camper={camper} />
         <p>{camper.description}</p>
       </div>
-      <div className={css.tabs}>
-        <Link to="features" className={css.current}>
-          Features
-        </Link>
-        {/* <Link to="reviews"><Reviews /></Link> */}
-      </div>
-      <div className={css.containerDetails}>
-        <div className={css.featureAndReviews}>
-          <Outlet />
-        </div>
-        <BookingForm />
-      </div>
+      <DetailsTabs />
     </div>
   );
 };
 
 export default CamperDetailsPage;
+

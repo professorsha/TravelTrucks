@@ -4,10 +4,6 @@ import Layout from '../Layout/Layout';
 import { useDispatch, useSelector } from 'react-redux';
 import { lazy, useEffect, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
-
-// import { refreshUser } from "./redux/auth/operations";
-// import { selectIsRefreshing } from "./redux/auth/selectors";
-
 import { Toaster } from 'react-hot-toast';
 import Loader from '../Loader/Loader';
 
@@ -20,15 +16,10 @@ const CamperDetailsPage = lazy(() =>
   import('../../pages/CamperDetailsPage/CamperDetailsPage')
 );
 const ReviewsPage = lazy(() => import('../../pages/ReviewsPage/ReviewsPage'));
+const FeaturesPage = lazy(() =>
+  import('../../pages/FeaturesPage/FeaturesPage')
+);
 export default function App() {
-  const dispatch = useDispatch();
-
-  // const isRefreshing = useSelector(selectIsRefreshing);
-
-  // useEffect(() => {
-  //   dispatch(refreshUser());
-  // }, [dispatch]);
-
   return (
     <>
       <Suspense fallback={<Loader />}>
@@ -37,14 +28,14 @@ export default function App() {
             <Route index element={<HomePage />} />
             <Route path="/catalog" element={<CatalogPage />} />
             <Route path="/catalog/:id" element={<CamperDetailsPage />}>
-              {/* <Route path="features" element={<FeaturesPage />} /> */}
+              <Route path="features" element={<FeaturesPage />} />
               <Route path="reviews" element={<ReviewsPage />} />
             </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
+        <Toaster position="top-center" reverseOrder={false} />
       </Suspense>
-      <Toaster position="top-center" reverseOrder={false} />
     </>
   );
 }
