@@ -6,13 +6,13 @@
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
-  width: 724px;
+  width: 788px;
   align-items: center;
+  padding: 28px 0 28px 64px;
 }
 .logo {
-  padding: 28px 0 28px 64px;
-  color: #101828;
-  font-weight: 700;
+  width: 136px;
+  height: 15px;
 }
 
 .menu {
