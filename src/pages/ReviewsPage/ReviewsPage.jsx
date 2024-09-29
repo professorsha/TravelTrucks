@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { FaStar } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCatalogById } from '../../redux/campers/operations.js';
-import { selectCamperById } from '../../redux/campers/selectors.js';
+import { selectActiveCamperId } from '../../redux/campers/selectors.js';
 import Avatar from '@mui/material/Avatar';
 import css from './ReviewsPage.module.css';
 
@@ -15,18 +15,18 @@ function stringAvatar(name) {
 
   return {
     sx: {
-      bgcolor: '#F2F4F7',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginRight: '16px',
       width: '60px',
       height: '60px',
       borderRadius: '60px',
       fontSize: '24px',
       fontWeight: 600,
       lineHeight: '1.33',
+      bgcolor: '#F2F4F7',
       color: '#E44848',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      marginRight: '16px',
     },
     children: initials,
   };
@@ -51,7 +51,7 @@ const renderStars = rating => {
 export default function ReviewsPage() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const selectedCamper = useSelector(selectCamperById);
+  const selectedCamper = useSelector(selectActiveCamperId);
   console.log(selectedCamper);
 
   useEffect(() => {

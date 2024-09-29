@@ -21,3 +21,12 @@
     display: flex;
     flex-direction: row;
   }
+  .activeStar {
+    color: #FFC531; /* Золотой цвет для активных звёзд */
+    margin-right: 4px;
+  }
+  
+  .inactiveStar {
+    color: #F2F4F7; /* Серый цвет для неактивных звёзд */
+    margin-right: 4px;
+  }

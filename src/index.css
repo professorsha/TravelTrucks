@@ -1,10 +1,16 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  
+}
+
+body {
+  font-family: "Inter", sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color: #101828;
 }
-
 a {
   font-weight: 500;
   color: #101828;
