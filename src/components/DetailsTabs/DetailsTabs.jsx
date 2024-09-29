@@ -1,4 +1,4 @@
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect, Suspense,lazy } from 'react';
 import { NavLink, useParams, Outlet } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
@@ -7,6 +7,7 @@ import {selectActiveCamperId} from '../../redux/campers/selectors.js';
 import Loader from '../../components/Loader/Loader';
 import css from './DetailsTabs.module.css';
 import BookingForm from '../BookingForm/BookingForm.jsx';
+const ReviewsPage = lazy(() => import('../../pages/ReviewsPage/ReviewsPage'));
 
 export default function DetailsNavigation() {
   const [activeTab, setActiveTab] = useState('features'); // Управляем текущей вкладкой
@@ -27,18 +28,12 @@ console.log(selectActive);
   const renderTabContent = () => {
     if (activeTab === 'features') {
       return (
-        <div>
-          <h2>Features</h2>
-          <p>Here are the features of the camper...</p>
-        </div>
+        <h1>dfgxfncg</h1>
       );
     }
     if (activeTab === 'reviews') {
       return (
-        <div>
-          <h2>Reviews</h2>
-          <p>Here are the reviews of the camper...</p>
-        </div>
+        <ReviewsPage/>
       );
     }
   };
