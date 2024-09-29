@@ -24,7 +24,7 @@ const favoritesSlice = createSlice({
   },
 });
 
-export const { toggleImageEquipments, setImageType, resetFavorites } =
+export const { toggleFavorites, resetFavorites } =
 favoritesSlice.actions;
 
 export const favoritesReducer = favoritesSlice.reducer;
