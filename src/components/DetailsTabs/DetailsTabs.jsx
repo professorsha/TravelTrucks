@@ -1,8 +1,9 @@
-import { useState, useEffect,Suspense } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { NavLink, useParams, Outlet } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
 import { fetchCatalogById } from '../../redux/campers/operations.js';
+import {selectActiveCamperId} from '../../redux/campers/selectors.js';
 import Loader from '../../components/Loader/Loader';
 import css from './DetailsTabs.module.css';
 import BookingForm from '../BookingForm/BookingForm.jsx';
@@ -11,6 +12,8 @@ export default function DetailsNavigation() {
   const [activeTab, setActiveTab] = useState('features'); // Управляем текущей вкладкой
   const { id } = useParams();
   const dispatch = useDispatch();
+const selectActive = useSelector(selectActiveCamperId);
+console.log(selectActive);
 
   useEffect(() => {
     dispatch(fetchCatalogById(id));
@@ -42,7 +45,7 @@ export default function DetailsNavigation() {
 
   return (
     <>
-      <nav className={css.navigation}>
+      <div className={css.navigation}>
         <ul className={css.wrap}>
           <li className={css.list}>
             <NavLink
@@ -62,11 +65,13 @@ export default function DetailsNavigation() {
             </NavLink>
           </li>
         </ul>
-      </nav>
+      </div>
 
       <Suspense fallback={<Loader />}>
-        {renderTabContent()}
-        <BookingForm/>
+        <div className={css.containerTabContent}>
+          <div>{renderTabContent()}</div>
+          <BookingForm />
+        </div>
       </Suspense>
     </>
   );

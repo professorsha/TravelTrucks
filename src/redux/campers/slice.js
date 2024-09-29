@@ -44,7 +44,7 @@ const campersSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.activeCamperId = action.payload;
-        console.log(state.activeCamperId);
+        // console.log(state.activeCamperId);
       });
   },
 });

@@ -35,5 +35,9 @@
     background-color: #e44848;
     content: "";
   }
-  
+  .containerTabContent{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
   
