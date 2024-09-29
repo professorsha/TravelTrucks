@@ -35,7 +35,7 @@ const Camper = ({ camper }) => {
           <div className={css.details}>
             <div className={css.reviews}>
               <svg width="16px" height="16px">
-                <use href="/images/icons.sv#iconStart"></use>
+                <use href="/images/star.svg"></use>
               </svg>
               <span>
                 {camper.rating} ({camper.reviews.length} Reviews)

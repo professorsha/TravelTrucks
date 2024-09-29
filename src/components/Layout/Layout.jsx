@@ -2,17 +2,18 @@
 
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
 import Header from '../Header/Header';
+import Loader from '../Loader/Loader';
 
 const Layout = () => {
   return (
     <>
       <Header />
-      <Suspense fallback={null}>
-        <Outlet />
+      <Suspense fallback={<Loader/>}>
+        <main>
+          <Outlet />
+        </main>
       </Suspense>
-      <Toaster position="top-right" reverseOrder={false} />
     </>
   );
 };

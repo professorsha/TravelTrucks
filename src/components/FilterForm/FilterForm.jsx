@@ -1,7 +1,10 @@
 import css from './FilterForm.module.css';
 import { Field, Form, Formik, ErrorMessage } from 'formik';
 import { useId } from 'react';
-import { filterSchema } from '../../validation.js';
+import { useDispatch, useSelector } from 'react-redux';
+// import { selectImageEquipments, selectImageType } from '../../redux/filters/selectors';
+// import { setLocation, toggleImageEquipments, setImageType } from '../../redux/filters/slice';
+// import { toggleImageEquipments, setImageType } from '../../redux/filters/slice';
 // Массив с данными для чекбоксов
 
 const imageEquipments = [
@@ -26,41 +29,46 @@ const imageType = [
 ];
 
 const FilterForm = () => {
-  const locationFieldId = useId();
-  const equipmentFieldId = useId();
-  const typeFieldId = useId();
+//    const locationFieldId = useId();
+  const dispatch = useDispatch();
+
+  // Достаем значения фильтров из состояния Redux
+//   const selectedEquipments = useSelector(selectImageEquipments);
+//   const selectedType = useSelector(selectImageType);
+
   return (
     <Formik
-      initialValues={{ location: '', selectedEquipment: [], selectedType: '' }}
-      //   validationSchema={filterSchema}
+    //   initialValues={{ location: '', selectedEquipment: selectedEquipments, selectedType: selectedType }}
+      initialValues={{ selectedEquipment: [], selectedType: '' }}
+      
       onSubmit={(values, actions) => {
         const userData = {
-          location: values.location,
+        //   location: values.location,
           selectedEquipment: values.selectedEquipment,
           selectedType: values.selectedType,
         };
-        // dispatch(logIn(userData));
 
-        console.log(
-          'Selected values:',
-          userData.selectedEquipment,
-          userData.selectedType
-        );
-
+        // Обновляем состояние фильтров в Redux
+        // dispatch(setLocation(values.location));
         actions.resetForm();
       }}
     >
-      {({ values, setFieldValue, errors, touched }) => (
+      {({ values, setFieldValue }) => (
         <Form className={css.formContainer}>
-          <label htmlFor={locationFieldId} className={css.label}>
+          <label htmlFor='locationFieldId' className={css.label}>
             location
           </label>
           <div className={css.wrap}>
             <Field
               type="text"
               name="location"
-              id={locationFieldId}
+            id='locationFieldId'
               className={css.inputField}
+            //   onChange={(e) => {
+            //     const { value } = e.target;
+            //     setFieldValue('location', value);
+            //     dispatch(setLocation(value)); // Обновляем location в Redux
+            //   }}
             />
             <ErrorMessage
               name="location"
@@ -77,13 +85,15 @@ const FilterForm = () => {
                 key={option.id}
                 className={css.imageCheckboxLabel}
                 onClick={() => {
-                  // Изменяем состояние, если картинка выбрана
                   const newSelectedEquipment =
                     values.selectedEquipment.includes(option.id)
                       ? values.selectedEquipment.filter(id => id !== option.id)
                       : [...values.selectedEquipment, option.id];
 
                   setFieldValue('selectedEquipment', newSelectedEquipment);
+
+                  // Обновляем фильтры по imageEquipments в Redux
+                //   dispatch(toggleImageEquipments(option.id));
                 }}
               >
                 {/* Используем картинку как "чекбокс" */}
@@ -102,10 +112,7 @@ const FilterForm = () => {
               </label>
             ))}
           </div>
-          {/* Показываем ошибку, если ни один чекбокс не выбран */}
-          {errors.selectedEquipment && touched.selectedEquipment && (
-            <div className="error">{errors.selectedEquipment}</div>
-          )}
+
           <h4>Vehicle type</h4>
           <div className={css.imageCheckboxGroup}>
             {imageType.map(option => (
@@ -113,20 +120,15 @@ const FilterForm = () => {
                 key={option.id}
                 className={css.imageCheckboxLabel}
                 onClick={() => {
-                  //   // Изменяем состояние, если картинка выбрана
-                  //   const newSelectedType = values.selectedType.includes(
-                  //     option.id
-                  //   )
-                  //     ? values.selectedType.filter(id => id !== option.id)
-                  //     : [...values.selectedType, option.id];
-
                   setFieldValue('selectedType', option.id);
+                  
+                  // Обновляем тип автомобиля в Redux
+                //   dispatch(setImageType(option.id));
                 }}
               >
-                {/* Используем картинку как "чекбокс" */}
                 <svg
                   className={
-                    values.selectedEquipment.includes(option.id)
+                    values.selectedType === option.id
                       ? 'imageCheckbox selected'
                       : 'imageCheckbox'
                   }
@@ -139,10 +141,7 @@ const FilterForm = () => {
               </label>
             ))}
           </div>
-          {/* Показываем ошибку, если ни один чекбокс не выбран */}
-          {errors.selectedType && touched.selectedType && (
-            <div className="error">{errors.selectedType}</div>
-          )}
+
           <button type="submit" className={css.submitButton}>
             Search
           </button>

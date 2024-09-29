@@ -5,7 +5,9 @@ const Header = () => {
     <header className={css.container}>
       <nav className={css.navigation}>
         <NavLink className={css.logo} to="/">
-          Travel<span className={css.logo_accent}>Trucks</span>
+          <svg width="136" height="15">
+            <use href="/images/logo.svg" />
+          </svg>
         </NavLink>
         <div className={css.menu}>
           <NavLink className={css.link} to="/">

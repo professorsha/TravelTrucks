@@ -9,15 +9,17 @@ import { Route, Routes } from 'react-router-dom';
 // import { selectIsRefreshing } from "./redux/auth/selectors";
 
 import { Toaster } from 'react-hot-toast';
-import { InfinitySpin } from 'react-loader-spinner';
+import Loader from '../Loader/Loader';
 
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
 const NotFoundPage = lazy(() =>
   import('../../pages/NotFoundPage/NotFoundPage')
 );
 const CatalogPage = lazy(() => import('../../pages/CatalogPage/CatalogPage'));
-const CamperDetailsPage = lazy(() => import('../../pages/CamperDetailsPage/CamperDetailsPage'));
-
+const CamperDetailsPage = lazy(() =>
+  import('../../pages/CamperDetailsPage/CamperDetailsPage')
+);
+const ReviewsPage = lazy(() => import('../../pages/ReviewsPage/ReviewsPage'));
 export default function App() {
   const dispatch = useDispatch();
 
@@ -29,23 +31,19 @@ export default function App() {
 
   return (
     <>
-      {/* <Suspense fallback={<div className="loader">
-      <InfinitySpin
-        visible={true}
-        width="200"
-        color="#FFC531"
-        ariaLabel="infinity-spin-loading"
-      />
-    </div>}> */}
+      <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
             <Route path="/catalog" element={<CatalogPage />} />
-            <Route path="/catalog/:id" element={<CamperDetailsPage />}/>
+            <Route path="/catalog/:id" element={<CamperDetailsPage />}>
+              {/* <Route path="features" element={<FeaturesPage />} /> */}
+              <Route path="reviews" element={<ReviewsPage />} />
+            </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
-      {/* </Suspense> */}
+      </Suspense>
       <Toaster position="top-center" reverseOrder={false} />
     </>
   );

@@ -6,7 +6,6 @@ import {
   selectError,
   selectIsLoading,
   selectCampers,
-  selectGallery,
 } from '../../redux/campers/selectors';
 import { InfinitySpin } from 'react-loader-spinner';
 
@@ -15,32 +14,32 @@ const CamperList = () => {
   const error = useSelector(selectError);
   const campers = useSelector(selectCampers);
   // const gallery = useSelector(selectGallery);
-//  Проверяем, что данные "Campers" из состояния Redux загружены
+  //  Проверяем, что данные "Campers" из состояния Redux загружены
   // console.log('Campers:', campers);
   // console.log('Is Loading:', isLoading);
-  // console.log('gallery:', gallery); 
+  // console.log('gallery:', gallery);
 
   // Локальное состояние для отслеживания количества отображаемых элементов
   const [visibleCampers, setVisibleCampers] = useState(4); // Начальное количество элементов
 
   // Обработчик для кнопки "Load More"
   const handleLoadMore = () => {
-    setVisibleCampers((prevVisibleCampers) => prevVisibleCampers + 4); // Увеличиваем на 5 элементов
+    setVisibleCampers(prevVisibleCampers => prevVisibleCampers + 4); // Увеличиваем на 5 элементов
   };
 
   return (
     <>
-      {isLoading && !error && (
+      {/* {isLoading && !error && (
         <InfinitySpin
           visible={true}
           width="200"
           color="#FFC531"
           ariaLabel="infinity-spin-loading"
         />
-      )}
+      )} */}
 
       <ul className={css.camperList}>
-        {campers.slice(0, visibleCampers).map((camper) => (
+        {campers.slice(0, visibleCampers).map(camper => (
           <li key={camper.id} className={css.camperItem}>
             <Camper camper={camper} />
           </li>
