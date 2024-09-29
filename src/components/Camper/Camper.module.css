@@ -65,3 +65,7 @@
 .button {
   color: #ffffff;
 }
+.activeStar {
+  color: #FFC531; 
+  margin-right: 4px;
+}

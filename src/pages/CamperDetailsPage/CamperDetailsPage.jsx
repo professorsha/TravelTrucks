@@ -5,9 +5,11 @@ import css from './CamperDetailsPage.module.css';
 import CamperDetailsGallery from '../../components/CamperDetailsGallery/CamperDetailsGallery';
 import Loader from '../../components/Loader/Loader';
 import DetailsTabs from '../../components/DetailsTabs/DetailsTabs';
+import { FaStar } from 'react-icons/fa';
+import { IoMapOutline } from "react-icons/io5";
 
 const CamperDetailsPage = () => {
-  const { id } = useParams(); // Получаем id из URL
+  const { id } = useParams();
   const [camper, setCamper] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -33,10 +35,7 @@ const CamperDetailsPage = () => {
   }, [id]);
 
   if (isLoading) {
-    return (
-      <Loader
-      />
-    );
+    return <Loader />;
   }
 
   if (error) {
@@ -50,17 +49,13 @@ const CamperDetailsPage = () => {
           <h2>{camper.name}</h2>
           <div className={css.details}>
             <div className={css.reviews}>
-              <svg width="16px" height="16px">
-                <use href="/images/star.svg"></use>
-              </svg>
+              <FaStar className={css.activeStar} />
               <span>
                 {camper.rating} ({camper.reviews.length} Reviews)
               </span>
             </div>
             <div className={css.location}>
-              <svg width="16px" height="16px">
-                <use href="/images/icons.sv#iconMap"></use>
-              </svg>
+            <IoMapOutline className={css.map} />
               <span>{camper.location}</span>
             </div>
           </div>
@@ -75,4 +70,3 @@ const CamperDetailsPage = () => {
 };
 
 export default CamperDetailsPage;
-

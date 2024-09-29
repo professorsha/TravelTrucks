@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import star from '../../images/star.svg';
+import { FaStar } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import css from './Camper.module.css';
 import { setActiveCamperId } from '../../redux/campers/slice.js';
@@ -35,9 +36,7 @@ const Camper = ({ camper }) => {
           </div>
           <div className={css.details}>
             <div className={css.reviews}>
-              <svg width="16px" height="16px">
-                <use href="/images/icons.svg#iconStar"></use>
-              </svg>
+              <FaStar className={css.activeStar}/>
               <span>
                 {camper.rating} ({camper.reviews.length} Reviews)
               </span>

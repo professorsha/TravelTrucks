@@ -49,3 +49,13 @@ h3 {
   gap: 40px;
   padding-top: 44px;
 }
+.details{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+.activeStar {
+  color: #FFC531; 
+  margin-right: 4px;
+}
