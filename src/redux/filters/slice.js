@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  selectLocation:'',
-  imageEquipments: [], // Выбранные фильтры по оборудованию (много)
-  imageType: '',       // Выбранный фильтр по типу (один)
+  selectLocation: '',
+  imageEquipments: [],
+  imageType: '',
 };
 
 const filtersSlice = createSlice({
@@ -21,21 +21,22 @@ const filtersSlice = createSlice({
         state.imageEquipments.push(action.payload);
       }
     },
-    
+
     // Обработка выбора типа автомобиля (один вариант)
     setImageType: (state, action) => {
       // Устанавливаем выбранный тип (заменяем предыдущий)
       state.imageType = action.payload;
     },
-    
+
     // Сброс фильтров
-    resetFilters: (state) => {
+    resetFilters: state => {
       state.imageEquipments = [];
       state.imageType = '';
     },
   },
 });
 
-export const { toggleImageEquipments, setImageType, resetFilters } = filtersSlice.actions;
+export const { toggleImageEquipments, setImageType, resetFilters } =
+  filtersSlice.actions;
 
-export const filtersReducer= filtersSlice.reducer;
+export const filtersReducer = filtersSlice.reducer;
