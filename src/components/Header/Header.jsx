@@ -9,10 +9,17 @@ const Header = () => {
           <img className={css.logo} src={logo} alt="Logo" />
         </NavLink>
         <div className={css.menu}>
-          <NavLink className={css.link} to="/">
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? `${css.link} ${css.activeLink}` : `${css.link}`
+            }
+            to="/"
+          >
             Home
           </NavLink>
-          <NavLink className={css.link} to="/catalog">
+          <NavLink className={({ isActive }) =>
+          isActive ? `${css.link} ${css.activeLink}` : css.link
+        } to="/catalog">
             Catalog
           </NavLink>
         </div>

@@ -5,6 +5,8 @@ import css from './CamperDetailsPage.module.css';
 import { InfinitySpin } from 'react-loader-spinner';
 import BookingForm from '../../components/BookingForm/BookingForm';
 import CamperDetailsGallery from '../../components/CamperDetailsGallery/CamperDetailsGallery';
+import Loader from '../../components/Loader/Loader';
+import Reviews from '../../components/Reviews/Reviews';
 // import { useDispatch, useSelector } from 'react-redux';
 // import {
 //   selectActiveCamperId,
@@ -39,11 +41,7 @@ const CamperDetailsPage = () => {
 
   if (isLoading) {
     return (
-      <InfinitySpin
-        visible={true}
-        width="200"
-        color="#FFC531"
-        ariaLabel="infinity-spin-loading"
+      <Loader
       />
     );
   }
@@ -82,7 +80,7 @@ const CamperDetailsPage = () => {
         <Link to="features" className={css.current}>
           Features
         </Link>
-        <Link to="reviews">Reviews</Link>
+        {/* <Link to="reviews"><Reviews /></Link> */}
       </div>
       <div className={css.containerDetails}>
         <div className={css.featureAndReviews}>

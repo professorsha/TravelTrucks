@@ -17,19 +17,19 @@
   border: 1px solid #dadde1;
 }
 .imageCheckboxLabel:hover {
-  border: 1px solid #e44848;
+  border-color: #e44848;
 }
 
 .imageCheckbox {
-  width: 112px;
-  height: 96px;
+  width: 32px;
+  height: 32px;
   object-fit: cover;
   border: 2px solid transparent;
-  transition: border-color 0.3s ease;
+  /* transition: border-color 0.3s ease; */
   fill: #101828;
 }
 
-.imageCheckbox.selected {
+.imageCheckboxLabel.selected {
   border-color: #e44848; /* Цвет рамки для выбранной картинки */
 }
 

@@ -1,108 +1,76 @@
 import css from './FilterForm.module.css';
 import { Field, Form, Formik, ErrorMessage } from 'formik';
-import { useId } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-// import { selectImageEquipments, selectImageType } from '../../redux/filters/selectors';
-// import { setLocation, toggleImageEquipments, setImageType } from '../../redux/filters/slice';
-// import { toggleImageEquipments, setImageType } from '../../redux/filters/slice';
-// Массив с данными для чекбоксов
+import { useDispatch } from 'react-redux';
+import { toggleImageEquipments, setImageType } from '../../redux/filters/slice'; // Импорт действий
 
 const imageEquipments = [
   { id: 'AC', label: 'AC', icon: '/images/icons.svg#iconAC' },
-  {
-    id: 'Automatic',
-    label: 'Automatic',
-    icon: '/images/icons.svg#iconAutomatic',
-  },
+  { id: 'Automatic', label: 'Automatic', icon: '/images/icons.svg#iconAutomatic' },
   { id: 'Kitchen', label: 'Kitchen', icon: '/images/icons.svg#iconKitchen' },
   { id: 'TV', label: 'TV', icon: '/images/icons.svg#iconTv' },
   { id: 'Bathroom', label: 'Bathroom', icon: '/images/icons.svg#iconBathroom' },
 ];
+
 const imageType = [
   { id: 'Van', label: 'Van', icon: '/images/icons.svg#iconVan' },
-  {
-    id: 'FullyIntegrated',
-    label: 'Fully Integrated',
-    icon: '/images/icons.svg#iconFullyIntegrated',
-  },
+  { id: 'FullyIntegrated', label: 'Fully Integrated', icon: '/images/icons.svg#iconFullyIntegrated' },
   { id: 'Alcove', label: 'Alcove', icon: '/images/icons.svg#iconAlcove' },
 ];
 
 const FilterForm = () => {
-//    const locationFieldId = useId();
   const dispatch = useDispatch();
-
-  // Достаем значения фильтров из состояния Redux
-//   const selectedEquipments = useSelector(selectImageEquipments);
-//   const selectedType = useSelector(selectImageType);
 
   return (
     <Formik
-    //   initialValues={{ location: '', selectedEquipment: selectedEquipments, selectedType: selectedType }}
       initialValues={{ selectedEquipment: [], selectedType: '' }}
-      
       onSubmit={(values, actions) => {
         const userData = {
-        //   location: values.location,
           selectedEquipment: values.selectedEquipment,
           selectedType: values.selectedType,
         };
 
-        // Обновляем состояние фильтров в Redux
-        // dispatch(setLocation(values.location));
+        // Вызываем действия Redux при сабмите формы
+        userData.selectedEquipment.forEach(equipment => {
+          dispatch(toggleImageEquipments(equipment));  // Обновляем выбранные фильтры по оборудованию
+        });
+        dispatch(setImageType(userData.selectedType));  // Обновляем тип транспортного средства
+
+        console.log('Filtered Data:', userData);
         actions.resetForm();
       }}
     >
       {({ values, setFieldValue }) => (
         <Form className={css.formContainer}>
-          <label htmlFor='locationFieldId' className={css.label}>
-            location
+          <label htmlFor="locationFieldId" className={css.label}>
+            Location
           </label>
           <div className={css.wrap}>
             <Field
               type="text"
               name="location"
-            id='locationFieldId'
+              id="locationFieldId"
               className={css.inputField}
-            //   onChange={(e) => {
-            //     const { value } = e.target;
-            //     setFieldValue('location', value);
-            //     dispatch(setLocation(value)); // Обновляем location в Redux
-            //   }}
             />
-            <ErrorMessage
-              name="location"
-              component="span"
-              className={css.errorMessage}
-            />
+            <ErrorMessage name="location" component="span" className={css.errorMessage} />
           </div>
 
           <span>Filters</span>
-          <h4>Vehicle equipment</h4>
+          <h4>Vehicle Equipment</h4>
           <div className={css.imageCheckboxGroup}>
             {imageEquipments.map(option => (
               <label
                 key={option.id}
-                className={css.imageCheckboxLabel}
+                className={`${css.imageCheckboxLabel} ${values.selectedEquipment.includes(option.id) ? css.selected : ''}`}
                 onClick={() => {
-                  const newSelectedEquipment =
-                    values.selectedEquipment.includes(option.id)
-                      ? values.selectedEquipment.filter(id => id !== option.id)
-                      : [...values.selectedEquipment, option.id];
+                  const newSelectedEquipment = values.selectedEquipment.includes(option.id)
+                    ? values.selectedEquipment.filter(id => id !== option.id)
+                    : [...values.selectedEquipment, option.id];
 
                   setFieldValue('selectedEquipment', newSelectedEquipment);
-
-                  // Обновляем фильтры по imageEquipments в Redux
-                //   dispatch(toggleImageEquipments(option.id));
                 }}
               >
-                {/* Используем картинку как "чекбокс" */}
                 <svg
-                  className={
-                    values.selectedEquipment.includes(option.id)
-                      ? 'imageCheckbox selected'
-                      : 'imageCheckbox'
-                  }
+                  className={values.selectedEquipment.includes(option.id) ? `${css.imageCheckbox} ${css.selected}` : css.imageCheckbox}
                   width="32px"
                   height="32px"
                 >
@@ -113,25 +81,18 @@ const FilterForm = () => {
             ))}
           </div>
 
-          <h4>Vehicle type</h4>
+          <h4>Vehicle Type</h4>
           <div className={css.imageCheckboxGroup}>
             {imageType.map(option => (
               <label
                 key={option.id}
-                className={css.imageCheckboxLabel}
+                className={`${css.imageCheckboxLabel} ${values.selectedType === option.id ? css.selected : ''}`}
                 onClick={() => {
                   setFieldValue('selectedType', option.id);
-                  
-                  // Обновляем тип автомобиля в Redux
-                //   dispatch(setImageType(option.id));
                 }}
               >
                 <svg
-                  className={
-                    values.selectedType === option.id
-                      ? 'imageCheckbox selected'
-                      : 'imageCheckbox'
-                  }
+                  className={values.selectedType === option.id ? `${css.imageCheckbox} ${css.selected}` : css.imageCheckbox}
                   width="32px"
                   height="32px"
                 >

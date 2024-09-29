@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  // selectLocation:'',
+  selectLocation:'',
   imageEquipments: [], // Выбранные фильтры по оборудованию (много)
   imageType: '',       // Выбранный фильтр по типу (один)
 };

@@ -55,6 +55,12 @@
 }
 .reviews {
   display: flex;
+  align-items: center;
+}
+.location{
+  display: flex;
+  align-items: center;
+  gap:4px;
 }
 .button {
   color: #ffffff;
