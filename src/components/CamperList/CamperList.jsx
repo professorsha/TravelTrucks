@@ -14,14 +14,14 @@ import {
 import Loader from '../Loader/Loader';
 
 const CamperList = () => {
-  const campers = useSelector(selectCampers); // Получаем список "Campers"
+  const campers = useSelector(selectCampers); 
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
   const selectedEquipments = useSelector(selectImageEquipments);
   const selectedType = useSelector(selectImageType);
 
-  // Локальное состояние для отслеживания количества отображаемых элементов
-  const [visibleCampers, setVisibleCampers] = useState(4); // Показываем по 4 элемента
+  
+  const [visibleCampers, setVisibleCampers] = useState(4); 
 
   // Фильтрация "Campers" по выбранным фильтрам
   const filteredCampers = campers.filter(camper => {
