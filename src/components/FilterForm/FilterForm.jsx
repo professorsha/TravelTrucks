@@ -41,7 +41,7 @@ const FilterForm = () => {
     >
       {({ values, setFieldValue }) => (
         <Form className={css.formContainer}>
-          <label htmlFor="locationFieldId" className={css.label}>
+          <label htmlFor="locationFieldId" className={css.labelLocation}>
             Location
           </label>
           <div className={css.wrap}>
@@ -49,7 +49,7 @@ const FilterForm = () => {
               type="text"
               name="location"
               id="locationFieldId"
-              className={css.inputField}
+              className={css.inputFieldLocation}
             />
             <ErrorMessage name="location" component="span" className={css.errorMessage} />
           </div>

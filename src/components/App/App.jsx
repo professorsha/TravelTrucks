@@ -1,8 +1,7 @@
 import './App.module.css';
 import Layout from '../Layout/Layout';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { lazy, useEffect, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Loader from '../Loader/Loader';

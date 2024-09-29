@@ -44,3 +44,15 @@
   border: none;
   border-radius: 200px;
 }
+.labelLocation{
+  color: #6C717B;
+  font-size: 16px;
+  font-weight: 400;
+}
+.inputFieldLocation{
+  width: 360px;
+  height: 56px;
+  background-color:#F7F7F7;
+  border: none;
+  border-radius: 12px;
+}
