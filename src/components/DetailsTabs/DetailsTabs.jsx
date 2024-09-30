@@ -8,7 +8,7 @@ import Loader from '../../components/Loader/Loader';
 import css from './DetailsTabs.module.css';
 import BookingForm from '../BookingForm/BookingForm.jsx';
 const ReviewsPage = lazy(() => import('../../pages/ReviewsPage/ReviewsPage'));
-
+const FeaturesPage = lazy(() => import('../../pages/FeaturesPage/FeaturesPage'));
 export default function DetailsNavigation() {
   const [activeTab, setActiveTab] = useState('features'); // Управляем текущей вкладкой
   const { id } = useParams();
@@ -28,7 +28,7 @@ console.log(selectActive);
   const renderTabContent = () => {
     if (activeTab === 'features') {
       return (
-        <h1>dfgxfncg</h1>
+        <FeaturesPage />
       );
     }
     if (activeTab === 'reviews') {

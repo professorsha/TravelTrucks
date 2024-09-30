@@ -6,7 +6,7 @@ import CamperDetailsGallery from '../../components/CamperDetailsGallery/CamperDe
 import Loader from '../../components/Loader/Loader';
 import DetailsTabs from '../../components/DetailsTabs/DetailsTabs';
 import { FaStar } from 'react-icons/fa';
-import { IoMapOutline } from "react-icons/io5";
+import { IoMapOutline } from 'react-icons/io5';
 
 const CamperDetailsPage = () => {
   const { id } = useParams();
@@ -26,7 +26,7 @@ const CamperDetailsPage = () => {
         setCamper(response.data); // Сохраняем данные
         setIsLoading(false);
       } catch (err) {
-        setError('Failed to fetch camper details');
+        setError(err + 'Failed to fetch camper details');
         setIsLoading(false);
       }
     };
@@ -55,7 +55,7 @@ const CamperDetailsPage = () => {
               </span>
             </div>
             <div className={css.location}>
-            <IoMapOutline className={css.map} />
+              <IoMapOutline className={css.map} />
               <span>{camper.location}</span>
             </div>
           </div>
