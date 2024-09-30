@@ -1,28 +1,29 @@
 import { NavLink } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa';
-
 import { useDispatch, useSelector } from 'react-redux';
+import { useMemo, useCallback } from 'react';
 import css from './Camper.module.css';
 import { setActiveCamperId } from '../../redux/campers/slice.js';
 import { selectFavorite } from '../../redux/favorites/selectors.js';
 import { toggleFavorites } from '../../redux/favorites/slice.js';
+import EquipmentsList from '../EquipmentsList/EquipmentsList.jsx';
 
 const Camper = ({ camper }) => {
   const favorites = useSelector(selectFavorite);
   const dispatch = useDispatch();
 
-  // Обработчик для клика по кнопке "Show more"
-  const handleDetails = () => {
-    dispatch(setActiveCamperId(camper.id)); // Устанавливаем активный ID
-  };
+  // Мемоизация для проверки избранного
+  const isFavorite = useMemo(() => favorites.some((f) => f.id === camper.id), [favorites, camper.id]);
 
-  // Обработчик для добавления/удаления избранного
-  const handleFavoriteClick = () => {
-    dispatch(toggleFavorites(camper)); // Добавляем или удаляем из избранного
-  };
+  // Мемоизированный обработчик клика по сердечку
+  const handleFavoriteClick = useCallback(() => {
+    dispatch(toggleFavorites(camper));
+  }, [dispatch, camper]);
 
-  // Проверка, добавлен ли camper в избранное
-  const isFavorite = favorites.some((f) => f.id === camper.id);
+  // Мемоизированный обработчик для "Show more"
+  const handleDetails = useCallback(() => {
+    dispatch(setActiveCamperId(camper.id));
+  }, [dispatch, camper.id]);
 
   return (
     <>
@@ -70,6 +71,7 @@ const Camper = ({ camper }) => {
           </div>
         </div>
         <p>{camper.description}</p>
+        <EquipmentsList/>
         <NavLink to={`/catalog/${camper.id}`} target="blank">
           <button type="button" className={css.button} onClick={handleDetails}>
             Show more
