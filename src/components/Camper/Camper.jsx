@@ -6,7 +6,7 @@ import css from './Camper.module.css';
 import { setActiveCamperId } from '../../redux/campers/slice.js';
 import { selectFavorite } from '../../redux/favorites/selectors.js';
 import { toggleFavorites } from '../../redux/favorites/slice.js';
-import EquipmentsList from '../EquipmentsList/EquipmentsList.jsx';
+import Equipment from '../Equipment/Equipment.jsx';
 
 const Camper = ({ camper }) => {
   const favorites = useSelector(selectFavorite);
@@ -71,7 +71,7 @@ const Camper = ({ camper }) => {
           </div>
         </div>
         <p>{camper.description}</p>
-        <EquipmentsList/>
+        <Equipment camper={camper}/>
         <NavLink to={`/catalog/${camper.id}`} target="blank">
           <button type="button" className={css.button} onClick={handleDetails}>
             Show more
