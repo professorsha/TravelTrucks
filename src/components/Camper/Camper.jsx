@@ -1,25 +1,35 @@
 import { NavLink } from 'react-router-dom';
-import star from '../../images/star.svg';
 import { FaStar } from 'react-icons/fa';
+
 import { useDispatch, useSelector } from 'react-redux';
 import css from './Camper.module.css';
 import { setActiveCamperId } from '../../redux/campers/slice.js';
-import { selectActiveCamperId } from '../../redux/campers/selectors.js';
+import { selectFavorite } from '../../redux/favorites/selectors.js';
+import { toggleFavorites } from '../../redux/favorites/slice.js';
+
 const Camper = ({ camper }) => {
+  const favorites = useSelector(selectFavorite);
   const dispatch = useDispatch();
-  const active = useSelector(selectActiveCamperId);
+
   // Обработчик для клика по кнопке "Show more"
   const handleDetails = () => {
     dispatch(setActiveCamperId(camper.id)); // Устанавливаем активный ID
   };
-  // console.log({selectActiveCamperId});
+
+  // Обработчик для добавления/удаления избранного
+  const handleFavoriteClick = () => {
+    dispatch(toggleFavorites(camper)); // Добавляем или удаляем из избранного
+  };
+
+  // Проверка, добавлен ли camper в избранное
+  const isFavorite = favorites.some((f) => f.id === camper.id);
 
   return (
     <>
       <img
         className={css.image}
         src={camper.gallery[0].original}
-        alt=""
+        alt={camper.name}
         width="292px"
         height="320px"
       />
@@ -29,14 +39,24 @@ const Camper = ({ camper }) => {
             <h2 className={css.title}>{camper.name}</h2>
             <div className={css.headerInfoRight}>
               <h2 className={css.title}>&euro;{camper.price}</h2>
-              <svg width="24px" height="24px" className={css.favorite}>
-                <use href="/images/icons.svg#iconHeart"></use>
-              </svg>
+              <button
+                className={css.heart}
+                onClick={handleFavoriteClick}
+                aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
+              >
+                <svg
+                  width="24px"
+                  height="24px"
+                  className={isFavorite ? css.filledHeart : css.emptyHeart}
+                >
+                  <use href="/images/icons.svg#iconHeart" />
+                </svg>
+              </button>
             </div>
           </div>
           <div className={css.details}>
             <div className={css.reviews}>
-              <FaStar className={css.activeStar}/>
+              <FaStar className={css.activeStar} />
               <span>
                 {camper.rating} ({camper.reviews.length} Reviews)
               </span>

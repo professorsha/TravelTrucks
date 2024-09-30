@@ -2,15 +2,16 @@
   border-radius: 10px;
   width: 292px;
   height: 320px;
-  /* overflow: hidden; */
   object-fit: cover;
 }
+
 .info {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 24px;
 }
+
 .textContainer {
   display: flex;
   flex-direction: column;
@@ -18,6 +19,7 @@
   gap: 8px;
   width: 524px;
 }
+
 .headerInfo {
   display: flex;
   flex-direction: row;
@@ -26,25 +28,46 @@
   justify-content: space-between;
   width: 524px;
 }
+
 .title {
   font-size: 24px;
   font-weight: 600;
   line-height: 1.33;
 }
+
 .headerInfoRight {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap:12px;
+  gap: 12px;
   justify-content: space-between;
 }
-.favorite {
-  fill: #101828;
+
+.heart {
+  border: none;
+  background-color: transparent;
+  width: 32px;
+  height: 32px;
+  /* color: transparent; */
   cursor: pointer;
+  padding: 0;
 }
+
 .favorite:hover {
   fill: #d84343;
+  stroke: #d84343;
 }
+
+.filledHeart {
+  fill: #d84343; /* Заливка красным для активного сердечка */
+  stroke: #d84343; /* Обводка красным */
+}
+
+.emptyHeart {
+  fill: none; /* Пустая заливка для неактивного сердечка */
+  stroke: black; /* Обводка чёрным */
+}
+
 .details {
   display: flex;
   flex-direction: row;
@@ -53,19 +76,23 @@
   justify-content: space-between;
   gap: 16px;
 }
+
 .reviews {
   display: flex;
   align-items: center;
 }
-.location{
+
+.location {
   display: flex;
   align-items: center;
-  gap:4px;
+  gap: 4px;
 }
+
 .button {
   color: #ffffff;
 }
+
 .activeStar {
-  color: #FFC531; 
+  color: #FFC531;
   margin-right: 4px;
 }

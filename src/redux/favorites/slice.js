@@ -1,30 +1,29 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  selectFavorite: [],
+  favorites: [],
 };
+
 const favoritesSlice = createSlice({
   name: 'favorites',
   initialState,
   reducers: {
-    // Обработка выбора фильтров по оборудованию
     toggleFavorites: (state, action) => {
-      const index = state.selectFavorite.indexOf(action.payload);
-      if (index >= 0) {
-        state.selectFavorite.splice(index, 1);
+      const camper = action.payload;
+      const isFavorite = state.favorites.some(fav => fav.id === camper.id);
+
+      if (isFavorite) {
+        state.favorites = state.favorites.filter(fav => fav.id !== camper.id);
       } else {
-        state.selectFavorite.push(action.payload);
+        state.favorites.push(camper);
       }
     },
-
-    // Сброс фильтров
-    resetFavorites: state => {
-      state.selectFavorite = [];
+    resetFavorites: (state) => {
+      state.favorites = [];
     },
   },
 });
 
-export const { toggleFavorites, resetFavorites } =
-favoritesSlice.actions;
+export const { toggleFavorites, resetFavorites } = favoritesSlice.actions;
 
 export const favoritesReducer = favoritesSlice.reducer;
